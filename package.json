@@ -1,0 +1,26 @@
+{
+  "name": "search_movies_service",
+  "version": "1.0.0",
+  "description": "Movies Searching endpoint",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js", 
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkshayRsenal/search_movies_service.git"
+  },
+  "author": "AkshayR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkshayRsenal/search_movies_service/issues"
+  },
+  "homepage": "https://github.com/AkshayRsenal/search_movies_service#readme",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.12.0",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  }
+}
