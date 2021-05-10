@@ -8,7 +8,7 @@
 
 - Hence, i decided to design the app as a microservice app consisting of 3 microservices:
 
-![architecture](architecture/CAPTURE.PNG)
+![architecture](Capture.PNG)
 
   - movie_app_refresh : a atmoic microservice NodeJS app that allows to refresh the movie data on demand . this microservice has a single http end that can be called whenever a refresh of the movie data is required.
   - movie_search_service : consisting of a NodeJS app that only deals handling search queries and returning responses.
