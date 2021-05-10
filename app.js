@@ -58,7 +58,7 @@ async function read(category, keywords) {
 
     const { body } = await client.search({
         index: 'movie_database',
-        size: 2,
+        size: 200,
         body: {
             query: elasticSearchObject/*  {
                 match: { category: keywords }
