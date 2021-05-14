@@ -1,34 +1,10 @@
 const { Client } = require('@elastic/elasticsearch')
+const config = require('config');
 const request = require('request');
+const elasticConfig = config.get('elastic');
 const express = require('express')
 const app = express()
-const config = require('config');
-const elasticConfig = config.get('elastic');
 const port = process.env.PORT || 5000
-
-// place in src with index.js no need to import anywhere
-const proxy = require('http-proxy-middleware')
-
-module.exports = function(app) {
-    // add other server routes to path array
-    app.use(proxy(['/','/movies/:category/:keywords' ], { target: 'http://localhost:5000' }));
-}
-
-app.use(function(req, res, next) {
-    
-//to allow cross domain requests to send cookie information.
-res.header('Access-Control-Allow-Credentials', true);
-
-// origin can not be '*' when crendentials are enabled. so need to set it to the request origin
-res.header('Access-Control-Allow-Origin',  req.headers.origin);
-
-// list of methods that are supported by the server
-res.header('Access-Control-Allow-Methods','OPTIONS,GET,PUT,POST,DELETE');
-
-res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, X-XSRF-TOKEN');
-
-    next();
-});
 
 const client = new Client({
     cloud: {
@@ -39,6 +15,13 @@ const client = new Client({
         password: elasticConfig.password
     }
 })
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 
 app.get('/', (req, res) => {
