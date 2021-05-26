@@ -8,11 +8,11 @@ const port = process.env.PORT || 5000
 
 const client = new Client({
     cloud: {
-        id: elasticConfig.cloudID
+        id: process.env.elasticCloudId
     },
     auth: {
-        username: elasticConfig.username,
-        password: elasticConfig.password
+        username: process.env.elasticUser,
+        password: process.env.elasticPassword
     }
 })
 
