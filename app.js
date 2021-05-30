@@ -72,3 +72,4 @@ app.listen(port, () => {
     console.log(`Example app listening at ${port}`)
 })
 
+module.exports = app;  // for testing purpose
