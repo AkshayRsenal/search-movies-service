@@ -33,6 +33,11 @@ app.get('/movies/:category/:keywords', (req, res) => {
     results.then(X => res.send(JSON.stringify(X)))
 })
 
+app.get('/all-media-resources', (req, res) => {
+    let results = read("all-media-resources", keywords="");
+    results.then(X => res.send(JSON.stringify(X)))
+})
+
 app.get('/refresh', (req, res) => {
     res.send('refresh completed')
 })
@@ -44,8 +49,11 @@ async function read(category, keywords) {
         var elasticSearchObject = {
             query_string: {
                 query: keywords
-
             }
+        }
+    } else if( category === 'all-media-resources' ) { 
+        var elasticSearchObject = {
+            "match_all": {}
         }
     } else {
         var Initialobject = {}
@@ -59,10 +67,15 @@ async function read(category, keywords) {
     const { body } = await client.search({
         index: 'movie_database',
         size: 200,
+        // size: 5,
         body: {
             query: elasticSearchObject
         }
     })
+
+    // body.hits.total.value
+
+    // return body.hits
     return body.hits.hits
 }
 // read().catch(console.log)
